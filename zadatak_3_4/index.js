@@ -1,19 +1,19 @@
+import express from "express";
+import pizzeRouter from "./routes/pizze.js";
+import narudzbeRouter from "./routes/narudzbe.js";
 
-
-
-const express = require("express");
 const app = express();
+const port = 3000;
 
-const PORT = 3000;
+app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Hello, gabi!");
+  res.send("Dobrodošli na stranicu sa pizzama!");
 });
 
-app.listen(PORT, (error) => {
-  if (error) {
-    console.error(`Greška prilikom pokretanja poslužitelja: ${error.message}`);
-  } else {
-    console.log(`Server je pokrenut na http://localhost:${PORT}`);
-  }
+app.use("/pizze", pizzeRouter);
+app.use("/narudzbe", narudzbeRouter);
+
+app.listen(port, () => {
+  console.log(`Server radi na http://localhost:${port}`);
 });
