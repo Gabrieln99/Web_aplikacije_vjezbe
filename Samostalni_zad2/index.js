@@ -1,36 +1,16 @@
 const express = require("express");
-const path = require("path");
+const app = express();
 
-const useri = [
-  { ime: "Gabriel", prezime: "Nadal" },
-  { ime: "Pero", prezime: "Peric" },
-  { ime: "Ante", prezime: "Anic" },
-];
-
-let app = express();
 const PORT = 3000;
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
-});
-
-/* ili
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html")); // Koristimo path.join za spajanje putanje
-});
-*/
-app.get("/about", (req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
-});
-
-app.get("/users", (req, res) => {
-  res.json(useri);
+  res.send("Hello, world!");
 });
 
 app.listen(PORT, (error) => {
   if (error) {
-    console.error(error);
+    console.error(`Greška prilikom pokretanja poslužitelja: ${error.message}`);
   } else {
-    console.log("Slušam na portu:", PORT);
+    console.log(`Server je pokrenut na http://localhost:${PORT}`);
   }
 });
