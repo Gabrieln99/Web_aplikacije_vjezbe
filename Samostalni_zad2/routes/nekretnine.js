@@ -15,12 +15,12 @@ const nekretnine = [
 
   {
     id: 2,
-    naziv: "Jednosoban stan",
+    naziv: "Dvosoban stan",
     opis: "Udoban stan u staroj gradskoj jezgri sa blizinom svih potrebnih sadržaja.",
     cijena: 85000,
     lokacija: "Osijek",
-    broj_soba: 1,
-    povrsina: 40,
+    broj_soba: 2,
+    povrsina: 60,
   },
   // Dodaj ostale nekretnine po potrebi
 ];
