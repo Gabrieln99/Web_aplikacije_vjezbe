@@ -1,37 +1,39 @@
-// ponude.js
-import express from 'express';
+import express from "express";
+import {nekretnine} from "./nekretnine.js";
 const router = express.Router();
-import nekretnine from './nekretnine.js';  // Uvoz podataka o nekretninama
 
 let ponude = [];
-let ponudaId = 1;
+let ponuda_id = 1;
 
-router.post('/', (req, res) => {
-  const { nekretnina_id, ime, prezime, ponudjena_cijena, broj_telefona } = req.body;
+router.get("/", (req, res) => {
+  res.json(ponude);
+});
 
-  // Provjera svih potrebnih podataka
+
+router.post("/", (req, res) => {
+  const { nekretnina_id, ime, prezime, ponudjena_cijena, broj_telefona } =
+    req.body;
   if (!nekretnina_id || !ime || !prezime || !ponudjena_cijena || !broj_telefona) {
-    return res.status(400).json({ poruka: "Molimo unesite sve podatke" });
+    return res.status(400).json({ poruka: "Unesite id nekretnine, ime, prezime, ponudjenu cijenu i broj telefona" });
   }
 
-  // Provjera postoji li nekretnina s navedenim ID-em
-  const nekretnina = nekretnine.find(n => n.id === nekretnina_id);
+  const nekretnina = nekretnine.find((n) => n.id === nekretnina_id);
   if (!nekretnina) {
-    return res.status(404).json({ poruka: "Nekretnina s navedenim ID-em ne postoji" });
+    return res
+      .status(404)
+      .json({ poruka: "Nekretnina s tim IDem ne postoji" });
   }
 
-  // Kreiranje nove ponude
   const nova_ponuda = {
-    id: ponudaId++,
+    id: ponuda_id++,
     nekretnina_id,
     ime,
     prezime,
     ponudjena_cijena,
     broj_telefona,
   };
-
-  ponude.push(nova_ponuda); // Dodavanje ponude u listu
-  res.status(201).json(nova_ponuda); // Odgovaranje s novom ponudom
+  ponude.push(nova_ponuda);
+  res.status(201).json(nova_ponuda);
 });
 
-export default router;
+export default router;
