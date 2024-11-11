@@ -1,13 +1,16 @@
-const express = require('express');
+
+
+
+const express = require("express");
 const app = express();
 
 const PORT = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
+app.get("/", (req, res) => {
+  res.send("Hello, gabi!");
 });
 
-app.listen(PORT, error => {
+app.listen(PORT, (error) => {
   if (error) {
     console.error(`Greška prilikom pokretanja poslužitelja: ${error.message}`);
   } else {
