@@ -8,7 +8,7 @@ const port = 3000;
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Dobrodošli na stranicu sa pizzama!");
+  res.status(200).send("Stranica sa pizzama");
 });
 
 app.use("/pizze", pizzeRouter);

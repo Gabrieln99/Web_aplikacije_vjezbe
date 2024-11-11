@@ -5,8 +5,8 @@ const menu = [
   { pizza: "Vegetariana", cijena: 12 },
   { pizza: "Margarita", cijena: 7 },
   { pizza: "Mjesana", cijena: 8 },
+  { pizza: "Piccante", cijena: 10 },
 ];
-
 let orders = [];
 
 const router = express.Router();
@@ -23,16 +23,17 @@ router.post("/naruci", (req, res) => {
   ) {
     return res.status(400).json({
       error:
-        "Niste poslali sve potrebne podatke. treba upisatinarudzba, prezime, adresa i broj_telefona.",
+        "Niste poslali sve potrebne podatke. Očekuju se narudzba, prezime, adresa i broj_telefona.",
     });
   }
 
   const invalidPizzas = narudzba.filter(
     (item) => !menu.some((pizza) => pizza.pizza === item.pizza)
   );
+
   if (invalidPizzas.length > 0) {
     return res.status(400).json({
-      error: `pizza/pizze koje ste naručili nisu dostupne: ${invalidPizzas
+      error: `Jedna ili više pizza nisu dostupne: ${invalidPizzas
         .map((item) => item.pizza)
         .join(", ")}`,
     });
@@ -49,8 +50,9 @@ router.post("/naruci", (req, res) => {
   const pizzaNames = narudzba
     .map((item) => `${item.pizza} (${item.velicina})`)
     .join(" i ");
-  res.status(200).json({
-    message: `Vaša narudžba za ${pizzaNames} je uspješno zaprimljena!`,
+
+  res.status(201).json({
+    message: `Narudžba za ${pizzaNames} je uspješno zaprimljena!`,
     prezime: klijent.prezime,
     adresa: klijent.adresa,
     ukupna_cijena: ukupnaCijena,
@@ -58,7 +60,29 @@ router.post("/naruci", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  res.json(orders);
+  res.status(200).json(orders);
+});
+
+router.get("/:id", (req, res) => {
+  const id_narudzbe = req.params.id;
+  const order = orders.find((order) => order.id === id_narudzbe);
+  if (order) {
+    res.status(200).json(order);
+  } else {
+    res.status(404).json({ message: "Narudžba nije pronađena." });
+  }
+});
+
+router.delete("/:id", (req, res) => {
+  const id_narudzbe = req.params.id;
+  const index = orders.findIndex((order) => order.id === id_narudzbe);
+
+  if (index !== -1) {
+    orders.splice(index, 1);
+    res.status(200).json({ message: "Narudžba uspješno obrisana." });
+  } else {
+    res.status(404).json({ message: "Narudžba nije pronađena." });
+  }
 });
 
 export default router;
