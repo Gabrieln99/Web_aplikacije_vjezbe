@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "ime": "John",
+    "godine_staza": "10",
+    "pozicija": "Direktor"
+  },
+  {
+    "id": 2,
+    "ime": "Pero",
+    "godine_staza": "20",
+    "pozicija": "Menager"
+  },
+  {
+    "id": 3,
+    "ime": "Pero",
+    "godine_staza": "20",
+    "pozicija": "IT"
+  }
+];
