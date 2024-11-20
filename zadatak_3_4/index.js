@@ -1,19 +1,15 @@
 import express from "express";
-import pizzeRouter from "./routes/pizze.js";
-import narudzbeRouter from "./routes/narudzbe.js";
+import nekretnine_ruter from "./routes/nekretnine.js";
+import ponude_ruter from "./routes/ponude.js";
 
 const app = express();
-const port = 3000;
+const PORT = 3000;
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.status(200).send("Stranica sa pizzama");
-});
+app.use("/nekretnine", nekretnine_ruter);
+app.use("/ponude", ponude_ruter);
 
-app.use("/pizze", pizzeRouter);
-app.use("/narudzbe", narudzbeRouter);
-
-app.listen(port, () => {
-  console.log(`Server radi na http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server radi na portu ${PORT}`);
 });
