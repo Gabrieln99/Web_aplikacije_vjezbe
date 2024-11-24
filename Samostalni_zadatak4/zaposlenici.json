@@ -40,5 +40,19 @@
     "prezime": "Ivanic",
     "godine_staza": 8,
     "pozicija": "Voditelj"
+  },
+  {
+    "id": 7,
+    "ime": "John",
+    "prezime": "Doe",
+    "godine_staza": "30",
+    "pozicija": "direttore"
+  },
+  {
+    "id": 8,
+    "ime": "John",
+    "prezime": "Doe",
+    "godine_staza": "30",
+    "pozicija": "direttore"
   }
 ]
