@@ -51,36 +51,7 @@ app.post("/pizze", async (req, res) => {
     console.log(error.errorResponse);
     res.status(400).json({ error: error.errorResponse }); // 400 jer je korisnik poslao neispravne podatke
   }
-}); /*
-
-app.post("/pizze", async (req, res) => {
-  let pizze_collection = db.collection("pizze");
-  let novaPizza = req.body;
-
-  
-  let obavezniKljucevi = ["naziv", "cijena", "sastojci", "slika"];
-
-  
-  if (!obavezniKljucevi.every((kljuc) => kljuc in novaPizza)) {
-    return res.status(400).json({ error: "Nedostaju obavezni ključevi" });
-  }
-  if (
-    typeof novaPizza.cijena !== "number" ||
-    !Array.isArray(novaPizza.sastojci) ||
-    !novaPizza.sastojci.every((s) => typeof s === "string")
-  ) {
-    return res.status(400).json({ error: "Neispravni podaci o pizzi" });
-  }
-
-  try {
-    let result = await pizze_collection.insertOne(novaPizza);
-    res.status(201).json({ insertedId: result.insertedId });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Greška pri dodavanju pizze" });
-  }
 });
-*/
 app.post("/narudzbe", async (req, res) => {
   let pizze_collection = db.collection("pizze");
   let narudzbe_collection = db.collection("narudzbe");
